@@ -1,15 +1,29 @@
+const noImages = [
+    "public/images/Sad Arrested Development GIF.gif",
+    "public/images/Sadness Reaction GIF by MOODMAN.gif",
+    "public/images/Sad Dog Gif.gif",
+    "public/images/SadAnthonyAnderson.gif"
+];
+
+const yesImages = [
+    "public/images/Dog Love GIF.gif",
+    "public/images/excited american horror story GIF.gif",
+    "public/images/goals love GIF by LVRS.gif",
+    "public/images/i love you heart GIF.gif"
+];
+
 const answers_no = {
     english: [
         "No",
-        "Are you sure?",
-        "Are you really sure??",
+        "ahh!",
+        "Bathong??",
         "Are you really realy sure???",
         "Think again?",
-        "Don't believe in second chances?",
-        "Why are you being so cold?",
-        "Maybe we can talk about it?",
-        "I am not going to ask again!",
-        "Ok now this is hurting my feelings!",
+        "I am calling Kelebogile",
+        "Ohh Modimo",
+        "Try pressing the Purple button",
+        "Ngwana wa ga Hilda",
+        "Maybe you shuold wear your Glasses",
         "You are now just being mean!",
         "Why are you doing this to me?",
         "Please give me a chance!",
@@ -66,27 +80,30 @@ let size = 50;
 let clicks = 0;
 
 no_button.addEventListener('click', () => {
-    // Change banner source
     let banner = document.getElementById('banner');
-    if (clicks === 0) {
-        banner.src = "public/images/no.gif";
-        refreshBanner();
-    }
+
+    // 🔄 Random NO image every click
+    banner.src = noImages[Math.floor(Math.random() * noImages.length)];
+    refreshBanner();
+
     clicks++;
-    // increase button height and width gradually to 250px
-    const sizes = [40, 50, 30, 35, 45]
-    const random = Math.floor(Math.random() * sizes.length);
-    size += sizes[random]
+
+    // Increase YES button size
+    const sizes = [40, 50, 30, 35, 45];
+    size += sizes[Math.floor(Math.random() * sizes.length)];
     yes_button.style.height = `${size}px`;
     yes_button.style.width = `${size}px`;
+
     let total = answers_no[language].length;
-    // change button text
+
+    // Change NO button text
     if (i < total - 1) {
         no_button.innerHTML = answers_no[language][i];
         i++;
-    } else if (i === total - 1) {
+    } else {
         alert(answers_no[language][i]);
         i = 1;
+        clicks = 0;
         no_button.innerHTML = answers_no[language][0];
         yes_button.innerHTML = answers_yes[language];
         yes_button.style.height = "50px";
@@ -96,17 +113,21 @@ no_button.addEventListener('click', () => {
 });
 
 yes_button.addEventListener('click', () => {
-    // change banner gif path
     let banner = document.getElementById('banner');
-    banner.src = "public/images/yes.gif";
+
+    // 💖 Random YES image
+    banner.src = yesImages[Math.floor(Math.random() * yesImages.length)];
     refreshBanner();
-    // hide buttons div
+
+    // Hide buttons
     let buttons = document.getElementsByClassName('buttons')[0];
     buttons.style.display = "none";
-    // show message div
+
+    // Show success message
     let message = document.getElementsByClassName('message')[0];
     message.style.display = "block";
 });
+
 
 function refreshBanner() {
     // Reload banner gif to force load  
